@@ -55,6 +55,5 @@ script: |
     | /tmp/xcpretty/bin/xcpretty -c
 
   echo 'Before sleep'
-  
   sleep 21  # I am just flailing here
   echo 'After sleep'

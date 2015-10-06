@@ -58,12 +58,4 @@ script: |
     return ${PIPESTATUS[0]}
   }
 
-  if ! build; then
-    if ! grep 'Connection peer refused channel request' /tmp/build.log; then
-      exit 1
-    fi
-    echo 'WARNING: Encountered https://github.com/travis-ci/travis-ci/issues/4725' &&
-    echo 'Waiting 12 seconds, then retrying...' &&
-    sleep 12
-    build
-  fi
+  sleep 20  # I am just flailing here

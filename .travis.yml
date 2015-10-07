@@ -51,8 +51,15 @@ script: |
 
   # ------ Project build (at last!) ------
 
+  export Siesta_TestMultipleNetworkProviders=1
   xcodebuild test -project Siesta.xcodeproj -scheme Siesta -destination 'platform=iOS Simulator,name=iPhone 5s' 2>&1 \
+    | tee /tmp/full-build.log \
     | /tmp/xcpretty/bin/xcpretty -c
+
+  echo
+  echo '------------- Full log: -------------'
+  echo
+  cat /tmp/full-build.log
 
   echo 'Before sleep'
   sleep 21  # I am just flailing here

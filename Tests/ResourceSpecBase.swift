@@ -23,7 +23,7 @@ class ResourceSpecBase: SiestaSpec
         
         beforeSuite { LSNocilla.sharedInstance().start() }
         afterSuite  { LSNocilla.sharedInstance().stop() }
-        afterEach   { LSNocilla.sharedInstance().clearStubs() }
+        afterEach   { NSThread.sleepForTimeInterval(0.05); LSNocilla.sharedInstance().clearStubs() }
         
         afterEach  { fakeNow = nil }
         

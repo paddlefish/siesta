@@ -27,6 +27,8 @@ class ResourceSpecBase: SiestaSpec
         
         afterEach  { fakeNow = nil }
         
+        print(NSProcessInfo.processInfo().environment)
+        
         if Int(NSProcessInfo.processInfo().environment["Siesta_TestMultipleNetworkProviders"] ?? "0") != 0
             {
             runSpecsWithNetworkingProvider("default NSURLSession",   networking: NSURLSessionConfiguration.defaultSessionConfiguration())

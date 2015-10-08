@@ -51,8 +51,17 @@ script: |
 
   # ------ Project build (at last!) ------
 
-  export Siesta_TestMultipleNetworkProviders=1
-  xcodebuild test -project Siesta.xcodeproj -scheme Siesta -destination 'platform=iOS Simulator,name=iPhone 5s' 2>&1 \
+  echo '----------------- env -----------------'
+  env
+  echo '----------------- build settings --------------------'
+  xcodebuild -showBuildSettings
+  echo '----------------- build --------------------'
+
+  xcodebuild test \
+    -project Siesta.xcodeproj \
+    -scheme Siesta \
+    -destination 'platform=iOS Simulator,name=iPhone 5s' \
+    Siesta_TestMultipleNetworkProviders=12>&1 \
     | tee /tmp/full-build.log \
     | /tmp/xcpretty/bin/xcpretty -c
 

@@ -52,8 +52,8 @@
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "Siesta_TestMultipleNetworkProviders"
-            value = "1"
-            isEnabled = "NO">
+            value = "$Siesta_TestMultipleNetworkProviders"
+            isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
       <AdditionalOptions>

@@ -40,7 +40,7 @@ class ResourcePathsSpec: ResourceSpecBase
             
             it("resolves paths with / prefix as subpaths")
                 {
-                expectChild("/",                  toResolveTo: "https://zingle.frotz/v1/a/b/")
+                expectChild("/",                  toResolveTo: "https://zingle.frotz/v1/a/b/FAIL")
                 expectChild("/c",                 toResolveTo: "https://zingle.frotz/v1/a/b/c")
                 }
             

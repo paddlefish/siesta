@@ -23,12 +23,12 @@ class ResourceSpecBase: SiestaSpec
         
         let env = NSProcessInfo.processInfo().environment
         
-        if env["CI"] != nil
+        if Int(env["Siesta_DelayAfterEachSpec"] ?? "0") != 0
             {
             // Nocilla’s threading is broken, and Travis exposes a race condition in it.
             // This delay is a workaround.
             print("---------> Using Travis workaround mode")
-            afterEach { NSThread.sleepForTimeInterval(0.2) }
+            afterEach { NSThread.sleepForTimeInterval(0.1) }
             }
         
         beforeSuite { LSNocilla.sharedInstance().start() }

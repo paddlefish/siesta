@@ -68,4 +68,4 @@ script: |
 
   sleep 5  # Workaround for Travis log truncation
 
-  exit buildresult
+  exit $buildresult

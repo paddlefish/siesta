@@ -27,7 +27,7 @@ class ResourceSpecBase: SiestaSpec
             {
             // Nocilla’s threading is broken, and Travis exposes a race condition in it.
             // This delay is a workaround.
-            afterEach { NSThread.sleepForTimeInterval(0.05) }
+            afterEach { NSThread.sleepForTimeInterval(0.1) }
             }
         
         beforeSuite { LSNocilla.sharedInstance().start() }

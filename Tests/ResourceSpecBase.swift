@@ -21,15 +21,22 @@ class ResourceSpecBase: SiestaSpec
         {
         super.spec()
         
+        let env = NSProcessInfo.processInfo().environment
+        
+        if env["CI"] != nil
+            {
+            // Nocilla’s threading is broken, and Travis exposes a race condition in it.
+            // This delay is a workaround.
+            afterEach { NSThread.sleepForTimeInterval(0.05) }
+            }
+        
         beforeSuite { LSNocilla.sharedInstance().start() }
         afterSuite  { LSNocilla.sharedInstance().stop() }
-        afterEach   { NSThread.sleepForTimeInterval(0.05); LSNocilla.sharedInstance().clearStubs() }
+        afterEach   { LSNocilla.sharedInstance().clearStubs() }
         
-        afterEach  { fakeNow = nil }
+        afterEach { fakeNow = nil }
         
-        print(NSProcessInfo.processInfo().environment)
-        
-        if Int(NSProcessInfo.processInfo().environment["Siesta_TestMultipleNetworkProviders"] ?? "0") != 0
+        if Int(env["Siesta_TestMultipleNetworkProviders"] ?? "0") != 0
             {
             runSpecsWithNetworkingProvider("default NSURLSession",   networking: NSURLSessionConfiguration.defaultSessionConfiguration())
             runSpecsWithNetworkingProvider("ephemeral NSURLSession", networking: NSURLSessionConfiguration.ephemeralSessionConfiguration())
